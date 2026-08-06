@@ -5,7 +5,6 @@ Maintainer: Martin Simon <martin@simon.tf>
 Build-Depends:
  cargo:native,
  debhelper (>= 12),
- libssl-dev,
  rustc:native,
 Standards-Version: 4.6.0
 Homepage: https://github.com/getzola/zola
@@ -13,6 +12,7 @@ Homepage: https://github.com/getzola/zola
 Package: zola
 Architecture: amd64
 Depends:
+ ca-certificates,
  ${misc:Depends},
  ${shlibs:Depends},
 Description: A fast static site generator in a single binary with everything built-in.

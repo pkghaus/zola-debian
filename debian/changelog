@@ -1,3 +1,10 @@
+zola (0.23.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add ca-certificates dependency; 0.23 aborts without a system CA store
+
+ -- Martin Simon <martin@simon.tf>  Thu, 06 Aug 2026 00:00:00 +0000
+
 zola (0.22.1-1) unstable; urgency=medium
 
   * New upstream release
