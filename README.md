@@ -9,7 +9,7 @@ If you have [Docker](https://www.docker.com/) installed locally, just run the fo
 ```bash
 user@hostname$ ./build.sh
 ```
-By default this will build zola 0.23.2 on Debian Trixie.
+By default this will build zola 0.23.3 on Debian Trixie.
 
 If you want to customize the build at runtime, use the following:
 

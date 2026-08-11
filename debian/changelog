@@ -1,3 +1,9 @@
+zola (0.23.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Martin Simon <martin@simon.tf>  Tue, 11 Aug 2026 00:00:00 +0000
+
 zola (0.23.2-1) unstable; urgency=medium
 
   * New upstream release
