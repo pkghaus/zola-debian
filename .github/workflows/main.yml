@@ -1,40 +1,15 @@
-name: Build and release packages
+name: Build
 
 on:
- push:
-  tags:
-    - '*'
+  push:
+    tags:
+      - '*'
+  pull_request:
 
-env:
-  DEBIAN_STABLE: trixie
-  PKG_NAME: zola
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build packages
-        run: |
-          set -xe
-          mkdir -p assets
-          ./build.sh -i debian:${{ env.DEBIAN_STABLE }}-slim
-          rename.ul .deb _${{ env.DEBIAN_STABLE }}.deb target/${{ env.PKG_NAME }}_*.deb
-          mv -n target/${{ env.PKG_NAME }}_*.deb assets/
-
-          ./build.sh -i debian:testing-slim
-          rename.ul .deb _testing.deb target/${{ env.PKG_NAME }}_*.deb
-          mv -n target/${{ env.PKG_NAME }}_*.deb assets/
-
-          ./build.sh -i debian:unstable-slim
-          rename.ul .deb _unstable.deb target/${{ env.PKG_NAME }}_*.deb
-          mv -n target/${{ env.PKG_NAME }}_*.deb assets/
-
-      - name: Build packages
-        uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: assets/*.deb
+    uses: pkghaus/action-debian-build/.github/workflows/build.yml@v1
+    secrets: inherit

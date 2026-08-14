@@ -1,7 +1,7 @@
 Source: zola
 Section: web
 Priority: optional
-Maintainer: Martin Simon <martin@simon.tf>
+Maintainer: pkg.haus archive <archive@pkg.haus>
 Build-Depends:
  cargo:native,
  debhelper (>= 12),
@@ -10,7 +10,7 @@ Standards-Version: 4.6.0
 Homepage: https://github.com/getzola/zola
 
 Package: zola
-Architecture: amd64
+Architecture: any
 Depends:
  ca-certificates,
  ${misc:Depends},
