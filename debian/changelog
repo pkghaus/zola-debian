@@ -1,3 +1,14 @@
+zola (0.23.3-3) unstable; urgency=high
+
+  * Install zola without the setuid bit; the binary was shipped mode
+    04755 (setuid root)
+  * Install the zsh completion under usr/share/zsh/vendor-completions,
+    where zsh actually looks
+  * Synopsis without the leading article; override embedded-library
+    (Rust links vendored C dependencies statically by design)
+
+ -- pkg.haus archive <archive@pkg.haus>  Sat, 15 Aug 2026 18:31:54 +0200
+
 zola (0.23.3-2) unstable; urgency=medium
 
   * Migrate to the pkghaus build pipeline

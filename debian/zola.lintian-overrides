@@ -1,0 +1,2 @@
+# Rust links its vendored C dependencies statically by design.
+zola: embedded-library
