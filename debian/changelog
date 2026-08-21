@@ -1,3 +1,11 @@
+zola (0.23.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * Install the fish completion under usr/share/fish/vendor_completions.d,
+    the vendor path, rather than fish's own completions directory
+
+ -- pkg.haus archive <archive@pkg.haus>  Fri, 21 Aug 2026 07:27:31 +0200
+
 zola (0.23.3-3) unstable; urgency=high
 
   * Install zola without the setuid bit; the binary was shipped mode

@@ -18,5 +18,5 @@ execute_after_dh_auto_build:
 override_dh_auto_install:
 	install -Dm0755 "target/release/zola" "debian/zola/usr/bin/zola"
 	install -Dm0644 "completions/zola.bash" "debian/zola/usr/share/bash-completion/completions/zola"
-	install -Dm0644 "completions/zola.fish" "debian/zola/usr/share/fish/completions/zola.fish"
+	install -Dm0644 "completions/zola.fish" "debian/zola/usr/share/fish/vendor_completions.d/zola.fish"
 	install -Dm0644 "completions/_zola" "debian/zola/usr/share/zsh/vendor-completions/_zola"
