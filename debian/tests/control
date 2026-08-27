@@ -1,0 +1,3 @@
+Tests: build-site
+Depends: zola
+Restrictions: allow-stderr

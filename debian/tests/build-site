@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Build a minimal site and check the rendered HTML, not just that zola exited.
+# A static site generator that writes an empty public/ satisfies an exit-status
+# check and fails this one.
+#
+# The template interpolates a variable, so a build where the templating engine
+# is present but not working produces the literal tag instead of the value and
+# is caught.
+
+set -euo pipefail
+
+WORK="${AUTOPKGTEST_TMP:-$(mktemp -d)}"
+cd "$WORK"
+mkdir -p site/content site/templates
+cd site
+
+cat > config.toml <<'TOML'
+base_url = "https://example.com"
+title = "Test Site"
+TOML
+printf '<html><body>{%% block content %%}{%% endblock %%}</body></html>' > templates/base.html
+printf '{%% extends "base.html" %%}{%% block content %%}<h1>{{ section.title }}</h1>{%% endblock %%}' > templates/index.html
+printf -- '+++\ntitle = "Home Page"\n+++\nbody text\n' > content/_index.md
+
+zola build 2>&1 || { echo "zola build failed on a minimal site" >&2; exit 1; }
+[ -s public/index.html ] || { echo "zola produced no public/index.html" >&2; exit 1; }
+
+cat public/index.html; echo
+
+grep -q '<h1>Home Page</h1>' public/index.html \
+    || { echo "the template did not interpolate section.title" >&2; exit 1; }
+if grep -q '{{' public/index.html; then
+    echo "an un-rendered template tag reached the output" >&2
+    exit 1
+fi
+
+want="$(dpkg-query -W -f='${Version}' zola | sed 's/-[^-]*$//')"
+got="$(zola --version 2>&1)"
+printf '%s\n' "$got"
+case "$got" in
+    *"$want"*) ;;
+    *) echo "zola --version [$got] does not name the packaged version [$want]" >&2; exit 1 ;;
+esac
+
+echo "built a site and rendered a template variable, version $want"
